@@ -55,6 +55,12 @@ export default class LocalHtmlExport extends Plugin {
 		} else {
 			copy = this.cloneMetadataContainer(copy);
 		}
+		const title = copy?.querySelector(".inline-title");
+		if (title) {
+			title.setAttribute("contenteditable", "false");
+			title.setAttribute("disabled", "true");
+			title.setAttribute("spellcheck", "false");
+		}
 		return this.fixEmbedHtml(copy);
 	}
 	
@@ -112,9 +118,10 @@ export default class LocalHtmlExport extends Plugin {
 		const bodyStyle = this.getBodyStyle(markdownView).cssText;
 		const bodyClass = this.getBodyClass(markdownView);
 		const appCss = await this.getAppCss();
+		const lang = markdownView.containerEl.doc.head.lang;
 		return `
 		<!DOCTYPE html>
-		<html lang="en">
+		<html lang="${lang}">
 		<style>${appCss}</style>
 		${this.removeCommentCss(head)}
 		<body class="${bodyClass}" style="${bodyStyle.replaceAll('"', "'")}">
