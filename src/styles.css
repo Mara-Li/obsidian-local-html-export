@@ -1,8 +1,18 @@
-/*
-
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
-*/
+span.exported-html.metadata-property-key-input {
+    border: none;
+    flex-grow: 1;
+    color: var(--metadata-label-text-color);
+    font-size: var(--metadata-label-font-size);
+    font-weight: var(--metadata-label-font-weight);
+    height: var(--input-height);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+   padding: var(--size-4-1) var(--size-4-2);
+    outline: none;
+    border-radius: 0;
+    white-space: pre;
+}

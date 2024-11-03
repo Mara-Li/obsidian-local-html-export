@@ -1,12 +1,15 @@
 import { type App, PluginSettingTab, Setting } from "obsidian";
-import <%= data.interfaceName %> from "./main";
+import type LocalHtmlExport from "./main";
+import type {LocalHtmlSettings} from "./interfaces";
 
-export class <%= data.interfaceName %>SettingTab extends PluginSettingTab {
-	plugin: <%= data.interfaceName %>;
+export class LocalHtmlSettingTab extends PluginSettingTab {
+	plugin: LocalHtmlExport;
+	settings: LocalHtmlSettings;
 
-	constructor(app: App, plugin: <%= data.interfaceName %>) {
+	constructor(app: App, plugin: LocalHtmlExport) {
 		super(app, plugin);
 		this.plugin = plugin;
+		this.settings = plugin.settings;
 	}
 
 	display(): void {
@@ -15,14 +18,15 @@ export class <%= data.interfaceName %>SettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName("Setting #1")
-			.setDesc("It's a secret")
-			.addText(text => text
-				.setPlaceholder("Enter your secret")
-				.setValue(this.plugin.settings.mySetting)
-				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
-					await this.plugin.saveSettings();
-				}));
+			.setName("Export frontmatter")
+			.setDesc("Add the frontmatter in the generated HTML. Don't really support the state of check and some values")
+			.addToggle((toggle) => {
+				toggle
+					.setValue(this.plugin.settings.exportFrontmatter)
+					.onChange(async (value) => {
+						this.settings.exportFrontmatter = value;
+						await this.plugin.saveSettings();
+					});
+			});
 	}
 }

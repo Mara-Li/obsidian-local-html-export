@@ -1,9 +1,9 @@
 
 
-export interface <%= data.interfaceName %>Settings {
-	mySetting: string;
+export interface LocalHtmlSettings {
+	exportFrontmatter: boolean;
 }
 
-export const DEFAULT_SETTINGS: <%= data.interfaceName %>Settings = {
-	mySetting: "default"
+export const DEFAULT_SETTINGS: LocalHtmlSettings = {
+	exportFrontmatter: false
 };
